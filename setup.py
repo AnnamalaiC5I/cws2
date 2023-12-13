@@ -27,7 +27,6 @@ LOCAL_REQUIREMENTS = [
 ]
 
 TEST_REQUIREMENTS = [
-    # development & testing tools
     "pytest",
     "coverage[toml]",
     "pytest-cov",

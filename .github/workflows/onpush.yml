@@ -1,11 +1,12 @@
 name: CI pipeline
 
 on:
-  push:
-    branches:
-      - '**'
-    tags-ignore:
-      - 'v*' # this tag type is used for release pipelines
+  # push:
+  #   branches:
+  #     - '**'
+  #   tags-ignore:
+  #     - 'v*' # this tag type is used for release pipelines
+  workflow_dispatch:
 
 jobs:
   job1:
@@ -16,8 +17,8 @@ jobs:
     env:
       DATABRICKS_HOST: ${{ secrets.DB_HOST }}
       DATABRICKS_TOKEN:  ${{ secrets.DB_TOKEN }}
-      AWS_ACCESS_KEY: ${{ secrets.C5I_ACCESS_KEY }}
-      AWS_SECRET_KEY: ${{ secrets.C5I_SECRET_KEY }}
+      # AWS_ACCESS_KEY: ${{ secrets.C5I_ACCESS_KEY }}
+      # AWS_SECRET_KEY: ${{ secrets.C5I_SECRET_KEY }}
 
     steps:
       - uses: actions/checkout@v1
@@ -25,7 +26,7 @@ jobs:
       - name: Set up Python 3.7
         uses: actions/setup-python@v4
         with:
-          python-version: '3.7'
+          python-version: '3.9'
           cache: 'pip' # caching pip dependencie
           cache-dependency-path: setup.py
 

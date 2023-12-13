@@ -1,4 +1,4 @@
-from demo_project.common import Task
+from v1.common import Task
 
 import json
 import pandas as pd

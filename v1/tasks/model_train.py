@@ -1,12 +1,12 @@
 import pandas as pd
 
-from demo_project.common import Task
+from v1.common import Task
 
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import  f1_score
 import warnings
 import boto3
-from demo_project.tasks.utils import push_df_to_s3
+from v1.tasks.utils import push_df_to_s3
 from io import BytesIO
 
 import mlflow

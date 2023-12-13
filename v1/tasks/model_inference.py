@@ -1,4 +1,4 @@
-from demo_project.common import Task
+from v1.common import Task
 #from databricks_registry_webhooks import RegistryWebhooksClient, JobSpec, HttpUrlSpec
 import boto3
 import pandas as pd
@@ -7,7 +7,7 @@ from io import BytesIO
 from sklearn.metrics import confusion_matrix, accuracy_score
 import numpy as np
 from databricks import feature_store
-from demo_project.tasks.utils import push_df_to_s3, read_data_from_s3
+from v1.tasks.utils import push_df_to_s3, read_data_from_s3
 from pyspark.dbutils import DBUtils
 
 
