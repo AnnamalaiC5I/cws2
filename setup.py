@@ -62,7 +62,10 @@ LOCAL_REQUIREMENTS = [
     "delta-spark==1.1.0",
     "scikit-learn",
     "pandas",
+    "boto3",
     "mlflow",
+    "databricks-sdk",
+    "databricks-feature-store",
 ]
 
 TEST_REQUIREMENTS = [
