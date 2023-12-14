@@ -17,8 +17,8 @@ jobs:
     env:
       DATABRICKS_HOST: ${{ secrets.DB_HOST }}
       DATABRICKS_TOKEN:  ${{ secrets.DB_TOKEN }}
-      # AWS_ACCESS_KEY: ${{ secrets.C5I_ACCESS_KEY }}
-      # AWS_SECRET_KEY: ${{ secrets.C5I_SECRET_KEY }}
+      AWS_ACCESS_KEY: ${{ secrets.C5I_ACCESS_KEY }}
+      AWS_SECRET_KEY: ${{ secrets.C5I_SECRET_KEY }}
 
     steps:
       - uses: actions/checkout@v1

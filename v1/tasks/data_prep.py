@@ -18,7 +18,7 @@ spark = SparkSession.builder.appName("CSV Loading Example").getOrCreate()
 
 dbutils = DBUtils(spark)
 
-current_branch : "dev"
+current_branch = "dev"
 
 
 #warnings
@@ -32,11 +32,11 @@ class DataPrep(Task):
                 
                 
 
-                #aws_access_key = dbutils.secrets.get(scope="secrets-scope", key="aws-access-key")
-                #aws_secret_key = dbutils.secrets.get(scope="secrets-scope", key="aws-secret-key")
+                aws_access_key = dbutils.secrets.get(scope="secrets-scope", key="c5_access")
+                aws_secret_key = dbutils.secrets.get(scope="secrets-scope", key="c5_secret")
                 
-                aws_access_key = 'AKIAWNJ3WZWLRU33KYAJ'
-                aws_secret_key = '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'
+                #aws_access_key = 'AKIAWNJ3WZWLRU33KYAJ'
+                #aws_secret_key = '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'
                 
                 
                 access_key = aws_access_key 
@@ -50,27 +50,27 @@ class DataPrep(Task):
                       region_name='ap-south-1')
                 
                 bucket_name =  self.conf['s3']['bucket_name']
-                csv_file_key = self.conf['s3'][current_branch]['file_path']
+                csv_file_key = self.conf['s3']['dev']['file_path']
 
                 df_input = read_data_from_s3(s3,bucket_name, csv_file_key)
 
                 df_input = df_input.reset_index()
         
 
-                df_feature, df_input = preprocess(spark,self.conf,df_input,current_branch)   
+                df_feature, df_input = preprocess(spark,self.conf,df_input,'dev')   
 
                 df_spark = spark.createDataFrame(df_feature)
 
                 fs = feature_store.FeatureStoreClient()
 
                 fs.create_table(
-                        name=self.conf['feature-store'][current_branch]['table_name'],
+                        name=self.conf['feature-store']['dev']['table_name'],
                         primary_keys=[self.conf['feature-store']['lookup_key']],
                         df=df_spark,
                         schema=df_spark.schema,
                         description="health features"
                     )
-                s3_object_key = self.conf['preprocessed'][current_branch]['preprocessed_df_path'] 
+                s3_object_key = self.conf['preprocessed']['dev']['preprocessed_df_path'] 
                 push_status = push_df_to_s3(df_input,s3_object_key,access_key,secret_key,self.conf)
                 print(push_status)
 
@@ -80,10 +80,10 @@ class DataPrep(Task):
                         region="us-west-2",
                         write_secret_prefix="feature-store-example-write/dynamo",
                         read_secret_prefix="feature-store-example-read/dynamo",
-                        table_name = self.conf['feature-store'][current_branch]['online_table_name']
+                        table_name = self.conf['feature-store']['dev']['online_table_name']
                         )
                 
-                fs.publish_table(self.conf['feature-store'][current_branch]['table_name'], online_store_spec)
+                fs.publish_table(self.conf['feature-store']['dev']['table_name'], online_store_spec)
 
                    
             
