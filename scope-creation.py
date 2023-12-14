@@ -5,8 +5,8 @@ import json
 
 host_url = os.environ.get('DATABRICKS_HOST')
 host_token = os.environ.get('DATABRICKS_TOKEN')
-c5_access  = os.environ.get('AWS_ACCESS_KEY')
-c5_secret  = os.environ.get('AWS_SECRET_KEY')
+c5_access  = os.environ.get('C5I_ACCESS_KEY')
+c5_secret  = os.environ.get('C5I_SECRET_KEY')
 
 print('The host url is ', host_url)
 
