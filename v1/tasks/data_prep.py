@@ -18,7 +18,7 @@ spark = SparkSession.builder.appName("CSV Loading Example").getOrCreate()
 
 dbutils = DBUtils(spark)
 
-current_branch = dbutils.secrets.get(scope="secrets-scope", key="current_branch")
+current_branch : "dev"
 
 
 #warnings

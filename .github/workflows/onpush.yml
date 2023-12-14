@@ -51,21 +51,21 @@ jobs:
         run: |
           dbx launch Data-preprocessing --from-assets --trace
       
-      - name: Workflow deployment (assets only upload)
-        run: |
-          dbx deploy Model-Training --assets-only
+      # - name: Workflow deployment (assets only upload)
+      #   run: |
+      #     dbx deploy Model-Training --assets-only
 
-      - name: Run the workflow in a jobless fashion
-        run: |
-          dbx launch Model-Training --from-assets --trace
+      # - name: Run the workflow in a jobless fashion
+      #   run: |
+      #     dbx launch Model-Training --from-assets --trace
       
-      - name: Workflow deployment (assets only upload)
-        run: |
-          dbx deploy Model-Inferencing --assets-only
+      # - name: Workflow deployment (assets only upload)
+      #   run: |
+      #     dbx deploy Model-Inferencing --assets-only
 
-      - name: Run the workflow in a jobless fashion
-        run: |
-          dbx launch Model-Inferencing --from-assets --trace
+      # - name: Run the workflow in a jobless fashion
+      #   run: |
+      #     dbx launch Model-Inferencing --from-assets --trace
       
       
       

@@ -1,6 +1,6 @@
 s3: 
      bucket_name: "pharma-usecase1"
-     file_pathsoumya_pracCVD_cleaned.csv"
+     file_path: "CVD_cleaned.csv"
      dev:
        file_path: "dev/CVD_cleaned.csv"
      stag:
