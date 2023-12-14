@@ -4,6 +4,7 @@ def get_current_git_branch():
     try:
         result = subprocess.run(['git', 'branch', '--show-current'], stdout=subprocess.PIPE, text=True, check=True)
         current_branch = result.stdout.strip()
+        print (current_branch)
         return current_branch
     except subprocess.CalledProcessError:
        
