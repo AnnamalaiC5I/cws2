@@ -1,6 +1,6 @@
 s3: 
      bucket_name: "pharma-usecase1"
-     file_path: "CVD_cleaned.csv"
+     file_pathsoumya_pracCVD_cleaned.csv"
      dev:
        file_path: "dev/CVD_cleaned.csv"
      stag:
@@ -15,10 +15,10 @@ dbfs:
 
 preprocessed:
      dev:
-           preprocessed_df_path: 'dev/preprocessed/preprocessed_df.csv' 
-           x_test: 'dev/preprocessed/x_test.csv'
-           y_test: 'dev/preprocessed/y_test.csv'
-           encoders_path: 'dev/preprocessed/encoders.pkl'
+           preprocessed_df_path: 'soumya_prac/preprocessed/preprocessed_df.csv' 
+           x_test: 'soumya_prac/preprocessed/x_test.csv'
+           y_test: 'soumya_prac/preprocessed/y_test.csv'
+           encoders_path: 'soumya_prac/preprocessed/encoders.pkl'
      
      stag:
            preprocessed_df_path: 'stag/preprocessed/preprocessed_df.csv' 
