@@ -32,8 +32,8 @@ class DataPrep(Task):
                 
                 
 
-                aws_access_key = dbutils.secrets.get(scope="secrets-scope", key="c5_access")
-                aws_secret_key = dbutils.secrets.get(scope="secrets-scope", key="c5_secret")
+                aws_access_key = dbutils.secrets.get(scope="secrets-scope", key="aws-access-key")
+                aws_secret_key = dbutils.secrets.get(scope="secrets-scope", key="aws-secret-key")
                 
                 #aws_access_key = 'AKIAWNJ3WZWLRU33KYAJ'
                 #aws_secret_key = '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'
