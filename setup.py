@@ -86,6 +86,9 @@ setup(
         "console_scripts": [
             "data_prep = v1.tasks.data_prep:entrypoint",
             "model_train = v1.tasks.model_train:entrypoint",
+            "model_inference = v1.tasks.model_inference:entrypoint",
+            "webhook = v1.tasks.webhook:entrypoint"
+            
     ]},
     version=__version__,
     description="",
