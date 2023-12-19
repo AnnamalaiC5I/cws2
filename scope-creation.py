@@ -100,7 +100,7 @@ scope_check(scope_name,'feature-store-example-write')
 add_secrets_to_scope('secrets-scope',"databricks-token",host_token)
 add_secrets_to_scope('secrets-scope',"databricks-host",host_url)
 add_secrets_to_scope('secrets-scope',"aws-access-key",c5_access)
-add_secrets_to_scope('secrets-scope','aws-secret-key',c5_secret)
+add_secrets_to_scope('secrets-scope',"aws-secret-key",c5_secret)
 
 add_secrets_to_scope('feature-store-example-read','dynamo-access-key-id',c5_access)
 add_secrets_to_scope('feature-store-example-read','dynamo-secret-access-key',c5_secret)
