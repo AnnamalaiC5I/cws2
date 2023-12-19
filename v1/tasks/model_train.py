@@ -23,7 +23,7 @@ from pyspark.dbutils import DBUtils
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score, auc, roc_curve
-from demo_project.tasks.utils import push_df_to_s3, read_data_from_s3
+from v1.tasks.utils import push_df_to_s3, read_data_from_s3
 
 warnings.filterwarnings('ignore')
 
