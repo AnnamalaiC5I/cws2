@@ -41,7 +41,10 @@ jobs:
       - name: Install dependencies and project in dev mode
         run: | 
           pip install -e ".[local,test]"
-
+      
+      - name: Run scope creation.py 
+        run: |
+           python scope-creation.py
 
       - name: Workflow deployment (assets only upload)
         run: |
