@@ -27,16 +27,16 @@ class ModelInference(Task):
               aws_secret_key = dbutils.secrets.get(scope="secrets-scope", key="aws-secret-key")
               db_host = dbutils.secrets.get(scope="secrets-scope", key="databricks-host")
               db_token = dbutils.secrets.get(scope="secrets-scope", key="databricks-token")
-              current_branch = dbutils.secrets.get(scope="secrets-scope", key="current_branch")
+              current_branch = "dev"
 
               s3 = boto3.resource("s3",aws_access_key_id=aws_access_key, 
                       aws_secret_access_key=aws_secret_key, 
                       region_name='us-west-2')
               
               bucket_name =  self.conf['s3']['bucket_name']
-              x_test_key = self.conf['preprocessed'][current_branch]['x_test']
+              x_test_key = self.conf['preprocessed']['dev']['x_test']
 
-              y_test_key = self.conf['preprocessed'][current_branch]['y_test']
+              y_test_key = self.conf['preprocessed']['dev']['y_test']
 
               x_test = read_data_from_s3(s3,bucket_name,x_test_key)
 
@@ -57,7 +57,7 @@ class ModelInference(Task):
 
               spark_test = spark.createDataFrame(x_test)
 
-              test_pred = fs.score_batch(f"models:/pharma_{current_branch}/latest", spark_test)
+              test_pred = fs.score_batch(f"models:/pharma_dev/latest", spark_test)
 
               ans_test = test_pred.toPandas()
 

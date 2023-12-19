@@ -32,15 +32,15 @@ fs = feature_store.FeatureStoreClient()
 spark = SparkSession.builder.appName("CSV Loading Example").getOrCreate()
 
 dbutils = DBUtils(spark)
-current_branch = dbutils.secrets.get(scope="secrets-scope", key="current_branch")
+current_branch = "dev"
 
 class Trainmodel(Task):
     
 
     def train_model(self, X_train, X_test, y_train, y_test, training_set, fs):
                         
-                        mlflow.set_experiment(self.conf['Mlflow'][current_branch]['experiment_name'])
-                        with mlflow.start_run(run_name=self.conf['Mlflow'][current_branch]['run_name']) as run:
+                        mlflow.set_experiment(self.conf['Mlflow']['dev']['experiment_name'])
+                        with mlflow.start_run(run_name=self.conf['Mlflow']['dev']['run_name']) as run:
                         
                                 LR_Classifier = LogisticRegression(
                                                         C=self.conf['LogisticReg']['C'],
@@ -64,7 +64,7 @@ class Trainmodel(Task):
                                 artifact_path="health_prediction",
                                 flavor=mlflow.sklearn,
                                 training_set=training_set,
-                                registered_model_name=f"pharma_{current_branch}",
+                                registered_model_name=f"pharma_dev",
                                 )
     
 
@@ -94,7 +94,7 @@ class Trainmodel(Task):
                       region_name='ap-south-1')
                 
                 bucket_name =  self.conf['s3']['bucket_name']
-                csv_file_key = self.conf['preprocessed'][current_branch]['preprocessed_df_path']
+                csv_file_key = self.conf['preprocessed']['dev']['preprocessed_df_path']
 
                 df_input = read_data_from_s3(s3,bucket_name, csv_file_key)
 
@@ -105,15 +105,15 @@ class Trainmodel(Task):
 
                 inference_data_df = df_input_spark.select(self.conf['feature-store']['lookup_key'], self.conf['features']['target'])
 
-                X_train, X_test, y_train, y_test, X_val, y_val, training_set = self.load_data(self.conf['feature-store'][current_branch]['table_name'], self.conf['feature-store']['lookup_key'],self.conf['features']['target'],inference_data_df)
+                X_train, X_test, y_train, y_test, X_val, y_val, training_set = self.load_data(self.conf['feature-store']['dev']['table_name'], self.conf['feature-store']['lookup_key'],self.conf['features']['target'],inference_data_df)
         
                 client = MlflowClient()
  
                 self.train_model(X_train, X_val, y_train, y_val, training_set, fs)
 
-                push_df_to_s3(X_test,self.conf['preprocessed'][current_branch]['x_test'],aws_access_key,aws_secret_key,self.conf)
+                push_df_to_s3(X_test,self.conf['preprocessed']['dev']['x_test'],aws_access_key,aws_secret_key,self.conf)
 
-                push_df_to_s3(y_test,self.conf['preprocessed'][current_branch]['y_test'],aws_access_key,aws_secret_key,self.conf)
+                push_df_to_s3(y_test,self.conf['preprocessed']['dev']['y_test'],aws_access_key,aws_secret_key,self.conf)
 
 
                 print("Model training is done")
